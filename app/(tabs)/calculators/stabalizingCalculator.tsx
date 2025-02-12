@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Text, TextInput, View, Pressable } from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
-import { getGlobalStyles } from '../../styles/globalStyles';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
 import { StatusBar } from 'expo-status-bar';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 
 const stabalizingCalculator = () => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

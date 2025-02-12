@@ -1,10 +1,10 @@
 import { Pressable, Text, View, ScrollView } from 'react-native';
-import { createEvent, createMead, getValueFor, loadAllEvents, loadAllMeads, save } from '../../utils/storageUtils';
+import { createEvent, createMead, getValueFor, loadAllEvents, loadAllMeads, save } from '../../../utils/storageUtils';
 import { useContext, useEffect, useState } from 'react';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
-import { getGlobalStyles } from '../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
 import { StatusBar } from 'expo-status-bar';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 import { Dropdown } from 'react-native-element-dropdown';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import * as FileSystem from 'expo-file-system';

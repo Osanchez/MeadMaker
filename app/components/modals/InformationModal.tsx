@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Modal, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
-import { getGlobalStyles } from '../../styles/globalStyles';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 
 const InformationModal = ({ information, modalVisible, setModalVisible }) => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

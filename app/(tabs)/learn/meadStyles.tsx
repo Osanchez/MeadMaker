@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, Pressable, ScrollView } from "react-native";
-import { loadAllMeadStyles } from "../../utils/storageUtils";
+import { loadAllMeadStyles } from "../../../utils/storageUtils";
 import { router, useFocusEffect } from 'expo-router';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
-import { getGlobalStyles } from '../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
 import { StatusBar } from 'expo-status-bar';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 
 const MyMeads = () => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

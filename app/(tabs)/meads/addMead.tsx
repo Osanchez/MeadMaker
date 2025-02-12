@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Text, TextInput, View, Pressable, Keyboard, TouchableWithoutFeedback } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { createMead } from '../../utils/storageUtils';
+import { createMead } from '../../../utils/storageUtils';
 import { router } from 'expo-router';
 import { ScrollView } from 'react-native-gesture-handler';
-import { getGlobalStyles } from '../../styles/globalStyles';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
 import { StatusBar } from 'expo-status-bar';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 
 const AddMead = () => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

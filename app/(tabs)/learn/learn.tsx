@@ -1,10 +1,10 @@
 import { router } from "expo-router";
 import { Text, View, Pressable } from "react-native";
 import { useContext } from "react";
-import { SelectedThemeContext } from "../../contexts/SelectedThemeContext";
-import { getGlobalStyles } from "../../styles/globalStyles";
+import { SelectedThemeContext } from "../../../contexts/SelectedThemeContext";
+import { getGlobalStyles } from "../../../styles/globalStyles";
 import { StatusBar } from "expo-status-bar";
-import { TextSizeContext } from "../../contexts/TextSizeContext";
+import { TextSizeContext } from "../../../contexts/TextSizeContext";
 
 const Learn = () => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

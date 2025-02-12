@@ -63,7 +63,7 @@ export async function ensurePredefinedData() {
 
     // update predefined data
     try {
-        const predefinedData = await require('../../assets/data/meadStyles.json');
+        const predefinedData = await require('../assets/data/meadStyles.json');
         const predefinedDataMeads = predefinedData.styles;
         // for every mead style in predefinedData, add it to secure storage
         for (const [key, value] of Object.entries(predefinedDataMeads)) {

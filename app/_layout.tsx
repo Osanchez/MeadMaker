@@ -1,12 +1,13 @@
 import { Stack } from "expo-router";
-import { SelectedThemeContext, themes } from "./contexts/SelectedThemeContext";
+import { GestureHandlerRootView } from "react-native-gesture-handler"; 
+import { SelectedThemeContext, themes } from "../contexts/SelectedThemeContext";
 import { useColorScheme} from "react-native";
 import { useEffect, useState } from "react";
-import { getValueFor } from "./utils/storageUtils";
-import { getGlobalStyles } from "./styles/globalStyles";
+import { getValueFor } from "../utils/storageUtils";
+import { getGlobalStyles } from "../styles/globalStyles";
 import { StatusBar, setStatusBarStyle } from "expo-status-bar";
-import { TextSizeContext, sizes } from "./contexts/TextSizeContext";
-import { ActionModalContext } from "./contexts/ActionModalContext";
+import { TextSizeContext, sizes } from "../contexts/TextSizeContext";
+import { ActionModalContext } from "../contexts/ActionModalContext";
 
 
 const RootLayout = () => {
@@ -66,18 +67,22 @@ const RootLayout = () => {
         setSelectedTextSize(size);
     }
 
-    return <TextSizeContext.Provider value={{textSize, setTextSizeHandler}}>
-        <SelectedThemeContext.Provider value={{theme, setThemeHandler}}>
-            <ActionModalContext.Provider value={{actionModalVisible, setActionModalVisible}}>
-                <StatusBar style={theme.statusBarStyle} />
-                <Stack>
-                    <Stack.Screen name = "(tabs)" options={{
-                        headerShown: false
-                    }} />
-                </Stack>
-            </ActionModalContext.Provider>
-        </SelectedThemeContext.Provider>
-    </TextSizeContext.Provider>
+    return (
+    <GestureHandlerRootView>
+        <TextSizeContext.Provider value={{textSize, setTextSizeHandler}}>
+            <SelectedThemeContext.Provider value={{theme, setThemeHandler}}>
+                <ActionModalContext.Provider value={{actionModalVisible, setActionModalVisible}}>
+                    <StatusBar style={theme.statusBarStyle} />
+                    <Stack>
+                        <Stack.Screen name = "(tabs)" options={{
+                            headerShown: false
+                        }} />
+                    </Stack>
+                </ActionModalContext.Provider>
+            </SelectedThemeContext.Provider>
+        </TextSizeContext.Provider>
+    </GestureHandlerRootView>
+    )
 }
 
 export default RootLayout;

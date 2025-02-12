@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
-import { getGlobalStyles } from '../../styles/globalStyles';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
-import { updateMead } from '../../utils/storageUtils';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
+import { updateMead } from '../../../utils/storageUtils';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 import { Dropdown } from 'react-native-element-dropdown';
 
 const RecipeModal = ({ meadDetails, setMeadDetails, recipeModalVisible, setRecipeModalVisible }) => {

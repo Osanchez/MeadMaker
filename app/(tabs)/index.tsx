@@ -1,12 +1,12 @@
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
-import { getGlobalStyles } from "../styles/globalStyles";
-import { ensurePredefinedData } from "../utils/storageUtils";
+import { getGlobalStyles } from "../../styles/globalStyles";
+import { ensurePredefinedData } from "../../utils/storageUtils";
 import {useContext, useEffect } from "react";
-import { SelectedThemeContext } from "../contexts/SelectedThemeContext";
+import { SelectedThemeContext } from "../../contexts/SelectedThemeContext";
 import { StatusBar } from "expo-status-bar";
 import { router } from "expo-router";
 import { FontAwesome5 } from '@expo/vector-icons'; 
-import { TextSizeContext } from "../contexts/TextSizeContext";
+import { TextSizeContext } from "../../contexts/TextSizeContext";
 
 const HomePage = () => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

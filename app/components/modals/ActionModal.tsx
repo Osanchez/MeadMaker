@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
-import { getGlobalStyles } from '../../styles/globalStyles';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { router } from 'expo-router';
-import { duplicateMead, loadAllEvents } from '../../utils/storageUtils';
+import { duplicateMead, loadAllEvents } from '../../../utils/storageUtils';
 import * as Print from 'expo-print';
 import * as FileSystem from 'expo-file-system';
 import { shareAsync } from 'expo-sharing';

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocalSearchParams } from "expo-router";
 import { Text, View, ScrollView, Image, StyleSheet } from "react-native";
-import { loadMead } from "../../utils/storageUtils";
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
-import { getGlobalStyles } from '../../styles/globalStyles';
+import { loadMead } from "../../../utils/storageUtils";
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
 import { StatusBar } from 'expo-status-bar';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
-import Icons from '../../constants/icons';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
+import Icons from '../../../constants/icons';
 
 const MeadPage = () => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Animated, Pressable, Text, ScrollView, Modal } from "react-native";
 import { Swipeable, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { deleteValueFor, loadAllMeads } from "../../utils/storageUtils";
+import { deleteValueFor, loadAllMeads } from "../../../utils/storageUtils";
 import { router, useFocusEffect } from 'expo-router';
-import { getGlobalStyles } from '../../styles/globalStyles';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
 import { StatusBar } from 'expo-status-bar';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
 

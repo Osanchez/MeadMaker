@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { SelectedThemeContext } from '../contexts/SelectedThemeContext';
-import { getGlobalStyles } from '../styles/globalStyles';
-import { TextSizeContext } from '../contexts/TextSizeContext';
+import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
+import { getGlobalStyles } from '../../styles/globalStyles';
+import { TextSizeContext } from '../../contexts/TextSizeContext';
 
 
 const CustomAddHeader = ({ title, addButtonText, onAddPress }) => {

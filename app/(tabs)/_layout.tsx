@@ -2,11 +2,11 @@ import { Tabs } from "expo-router"
 import CustomAddHeader from '../components/CustomAddHeader';
 import { router } from 'expo-router';
 import { useContext } from "react";
-import { SelectedThemeContext } from "../contexts/SelectedThemeContext";
-import { getGlobalStyles } from "../styles/globalStyles";
+import { SelectedThemeContext } from "../../contexts/SelectedThemeContext";
+import { getGlobalStyles } from "../../styles/globalStyles";
 import { FontAwesome5 } from '@expo/vector-icons'; 
-import { TextSizeContext } from "../contexts/TextSizeContext";
-import { ActionModalContext } from "../contexts/ActionModalContext";
+import { TextSizeContext } from "../../contexts/TextSizeContext";
+import { ActionModalContext } from "../../contexts/ActionModalContext";
 
 const TabsLayout = () => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

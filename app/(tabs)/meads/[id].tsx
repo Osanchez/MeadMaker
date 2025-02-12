@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useFocusEffect, useLocalSearchParams } from "expo-router";
 import { Animated, Pressable, Text, View, TouchableOpacity } from "react-native";
-import { deleteEvent, loadAllEvents, loadMead, updateMead } from "../../utils/storageUtils";
+import { deleteEvent, loadAllEvents, loadMead, updateMead } from "../../../utils/storageUtils";
 import { ScrollView, Swipeable } from 'react-native-gesture-handler';
-import { getGlobalStyles } from '../../styles/globalStyles';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
 import { StatusBar } from 'expo-status-bar';
 import EventModal from '../../components/modals/EventModal';
 import RecipeModal from '../../components/modals/RecipeModal';
 import TagModal from '../../components/modals/TagModal';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 import InformationModal from '../../components/modals/InformationModal';
 import ActionModal from '../../components/modals/ActionModal';
-import { ActionModalContext } from '../../contexts/ActionModalContext';
+import { ActionModalContext } from '../../../contexts/ActionModalContext';
 
 const MeadPage = () => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);

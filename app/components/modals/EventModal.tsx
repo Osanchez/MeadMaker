@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { getGlobalStyles } from '../../styles/globalStyles';
-import { SelectedThemeContext } from '../../contexts/SelectedThemeContext';
-import { createEvent } from '../../utils/storageUtils';
-import { TextSizeContext } from '../../contexts/TextSizeContext';
+import { getGlobalStyles } from '../../../styles/globalStyles';
+import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
+import { createEvent } from '../../../utils/storageUtils';
+import { TextSizeContext } from '../../../contexts/TextSizeContext';
 
 const EventModal = ({ meadDetails, setMeadDetails, eventModalVisible, setEventModalVisible }) => {
     const {theme, setThemeHandler} = useContext(SelectedThemeContext);
