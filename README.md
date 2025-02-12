@@ -10,7 +10,6 @@ MeadMaker is a mobile application built using [Expo](https://expo.dev/) and [Rea
 - [Features](#features)
 - [Installation](#installation)
 - [Running the App](#running-the-app)
-- [Folder Structure](#folder-structure)
 - [Technologies Used](#technologies-used)
 - [License](#license)
 
