@@ -1,0 +1,80 @@
+{
+    "timestamp": "2023-12-29T00:00:00Z",
+    "styles": {
+        "Traditional": {
+            "name": "Traditional",
+            "description": "Traditional mead is made with honey, water, and yeast. It focuses on the flavor of the honey used. Aging allows development of a complex flavor profile.",
+            "image": "Traditional"
+        },
+        "Sack": {
+            "name": "Sack",
+            "description": "Sack mead is made with a higher honey to water ratio, resulting in a higher alcohol content and a sweeter, more full-bodied mead.",
+            "image": "Sack"
+        },
+        "Hydromel": {
+            "name": "Hydromel",
+            "description": "Hydromel is a low-alcohol mead, often made with a higher water to honey ratio. It is a refreshing, light, and easy to drink mead.",
+            "image": "Hydromel"
+        },
+        "Melomel": {
+            "name": "Melomel",
+            "description": "Melomel is made by fermenting honey with various fruits like berries, apples, or peaches. This adds a fruity flavor and complexity to the mead.",
+            "image": "Melomel"
+        },
+        "Cyser": {
+            "name": "Cyser",
+            "description": "Cyser is a type of mead made by fermenting honey with apple juice. It combines characteristics of mead and cider, often resulting in a balanced, crisp drink.",
+            "image": "Cyser"
+        },
+        "Pyment": {
+            "name": "Pyment",
+            "description": "Pyment blends grape juice or grapes with honey, combining elements of wine and mead. It can vary from dry to sweet, depending on the grape variety used.",
+            "image": "Pyment"
+        },
+        "Metheglin": {
+            "name": "Metheglin",
+            "description": "Metheglin is made by adding spices and herbs to the mead, creating a flavorful and aromatic drink. Common additions include cinnamon, ginger, and vanilla.",
+            "image": "Metheglin"
+        },
+        "Braggot": {
+            "name": "Braggot",
+            "description": "Braggot is made by blending honey with malted grains, often resulting in a stronger, beer-like mead with a more robust flavor and higher alcohol content.",
+            "image": "Braggot"
+        },
+        "Acerglyn": {
+            "name": "Acerglyn",
+            "description": "Acerglyn is made by mixing honey with maple syrup. The distinct maple flavor makes it a unique and often seasonally enjoyed mead.",
+            "image": "Acerglyn"
+        },
+        "Bochet": {
+            "name": "Bochet",
+            "description": "Bochet involves caramelizing the honey before fermentation, giving the mead rich, toasty, and caramel-like flavors, making it distinct from traditional mead.",
+            "image": "Bochet"
+        },
+        "Capsicumel": {
+            "name": "Capsicumel",
+            "description": "Capsicumel is a mead variety that includes chili peppers. This style offers a spicy kick, varying in heat levels and often complemented by other flavors.",
+            "image": "Capsicumel"
+        },
+        "Rhodomel": {
+            "name": "Rhodomel",
+            "description": "Rhodomel is made by fermenting honey with rose petals or rose hips, offering a floral aroma and a delicate, romantic flavor profile.",
+            "image": "Rhodomel"
+        },
+        "Black_Mead": {
+            "name": "Black Mead",
+            "description": "Black mead is made by fermenting honey with black currants, resulting in a rich, dark, and fruity mead with a deep red color.",
+            "image": "Black"
+        },
+        "Coffeamel": {
+            "name": "Coffeamel",
+            "description": "Coffeamel is a mead variety that includes coffee. This style offers a rich, coffee flavor, often complemented by other flavors.",
+            "image": "Coffeamel"
+        },
+        "Viking_Blood": {
+            "name": "Viking Blood",
+            "description": "Viking blood is a mead variety that includes cherries and hibiscus giving it a deep red color. This style offers a rich, fruity flavor, often complemented by other flavors.",
+            "image": "Viking Blood"
+        }
+    }
+}
