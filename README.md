@@ -1,6 +1,8 @@
 # MeadMaker
 
-MeadMaker is a mobile application built using [Expo](https://expo.dev/) and [React Native](https://reactnative.dev/). This app helps users manage their mead-making process by tracking ingredients, fermentation progress, and tasting notes.
+MeadMak![image3](https://github.com/user-attachments/assets/2599a3ad-a236-4b36-ae9f-50f7eb4f215a)
+
+er is a mobile application built using [Expo](https://expo.dev/) and [React Native](https://reactnative.dev/). This app helps users manage their mead-making process by tracking ingredients, fermentation progress, and tasting notes.
 
 ## Table of Contents
 
