@@ -1,8 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useFocusEffect, useLocalSearchParams } from "expo-router";
-import { Animated, Pressable, Text, View, TouchableOpacity } from "react-native";
-import { deleteEvent, loadAllEvents, loadMead, updateMead } from "../../../utils/storageUtils";
-import { ScrollView, Swipeable } from 'react-native-gesture-handler';
+import { Pressable, Text, View } from "react-native";
+import { loadAllEvents, loadMead, updateMead } from "../../../utils/storageUtils";
+import { ScrollView } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import ReanimatedSwipeable, {SwipeableMethods}  from 'react-native-gesture-handler/ReanimatedSwipeable';
+import { Dimensions } from 'react-native';
+import Reanimated, {
+    SharedValue,
+    useAnimatedStyle,
+  } from 'react-native-reanimated';  
+  import { FontAwesome5 } from '@expo/vector-icons'; 
 import { getGlobalStyles } from '../../../styles/globalStyles';
 import { SelectedThemeContext } from '../../../contexts/SelectedThemeContext';
 import { StatusBar } from 'expo-status-bar';
@@ -33,6 +41,9 @@ const MeadPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const swipeableRefs = useRef(new Map());  // Stores refs for each event
+
+    const screenWidth = Dimensions.get('window').width;
 
     // load all meads when component is focused
     useFocusEffect(
@@ -96,14 +107,27 @@ const MeadPage = () => {
     }
 
     const onDeleteEvent = async (index) => {
-        const eventToDelete = meadDetails["events"][index];
-        await deleteEvent(meadDetails["id"], eventToDelete);
         const newEvents = [...meadDetails["events"]];
         newEvents.splice(index, 1);
         meadDetails["events"] = newEvents;
         await updateMead(meadDetails["id"], meadDetails);
         setMeadDetails(meadDetails);
         fetchMeadDetails();
+    }
+
+    const deleteIngredient = (index) => {
+        onDeleteIngredient(index)
+        swipeableRefs.current.get(index)?.close();
+    }
+
+    const deleteTag = (index) => {
+        onDeleteTag(index)
+        swipeableRefs.current.get(index)?.close();
+    }
+
+    const deleteEvent = (index) => {
+        onDeleteEvent(index)
+        swipeableRefs.current.get(index)?.close();
     }
 
     const onEventLongPress = (event) => {
@@ -116,84 +140,25 @@ const MeadPage = () => {
         setInformationModalVisible(true);
     }
 
-    const renderIngredientRightActions = (
-        progress: Animated.AnimatedInterpolation<number>,
-        dragAnimatedValue: Animated.AnimatedInterpolation<number>, 
-        index: number) => {
-            const opacity = dragAnimatedValue.interpolate({
-                inputRange: [-150, 0],
-                outputRange: [1, 0],
-                extrapolate: 'clamp',
-                });
-                    
-            return (
-                <View style={globalStyles.swipedRow}>
-                    <View style={globalStyles.swipedConfirmationContainer}>
-                    <Text style={globalStyles.label}>Are you sure?</Text>
-                    </View>
-                    <Animated.View style={[globalStyles.deleteButton, {opacity}]}>
-                    <TouchableOpacity 
-                    onPress={() => {
-                        onDeleteIngredient(index)
-                    }}>
-                        <Text style={globalStyles.deleteButtonText}>Delete</Text>
-                    </TouchableOpacity>
-                    </Animated.View>
-                </View>
-            );
-      };
+    const renderRightAction = (
+        prog: SharedValue<number>,
+        drag: SharedValue<number>) => {
+            const styleAnimation = useAnimatedStyle(() => {
+                return {
+                    backgroundColor: 'red',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    width: screenWidth,
+                    transform: [{ translateX: drag.value + screenWidth }],
+                };
+            });
 
-    const renderTagRightActions = (
-        progress: Animated.AnimatedInterpolation<number>,
-        dragAnimatedValue: Animated.AnimatedInterpolation<number>, 
-        index: number) => {
-            const opacity = dragAnimatedValue.interpolate({
-                inputRange: [-150, 0],
-                outputRange: [1, 0],
-                extrapolate: 'clamp',
-                });
-                    
             return (
-                <View style={globalStyles.swipedRow}>
-                    <View style={globalStyles.swipedConfirmationContainer}>
-                    <Text style={globalStyles.label}>Are you sure?</Text>
-                    </View>
-                    <Animated.View style={[globalStyles.deleteButton, {opacity}]}>
-                    <TouchableOpacity 
-                    onPress={() => {
-                        onDeleteTag(index)
-                    }}>
-                        <Text style={globalStyles.deleteButtonText}>Delete</Text>
-                    </TouchableOpacity>
-                    </Animated.View>
-                </View>
-            );
-      }
-    
-    const renderEventRightActions = (
-        progress: Animated.AnimatedInterpolation<number>,
-        dragAnimatedValue: Animated.AnimatedInterpolation<number>, 
-        index: number) => {
-            const opacity = dragAnimatedValue.interpolate({
-                inputRange: [-150, 0],
-                outputRange: [1, 0],
-                extrapolate: 'clamp',
-                });
-                    
-            return (
-                <View style={globalStyles.swipedRow}>
-                    <View style={globalStyles.swipedConfirmationContainer}>
-                    <Text style={globalStyles.label}>Are you sure?</Text>
-                    </View>
-                    <Animated.View style={[globalStyles.deleteButton, {opacity}]}>
-                    <TouchableOpacity 
-                    onPress={() => {
-                        onDeleteEvent(index)
-                    }}>
-                        <Text style={globalStyles.deleteButtonText}>Delete</Text>
-                    </TouchableOpacity>
-                    </Animated.View>
-                </View>
+                <Reanimated.View style={[styleAnimation]}>
+                    <Text style={globalStyles.swipeDeleteLabel}>Delete</Text>
+                    <FontAwesome5 name="trash" size={25} color={theme.color} />
+                </Reanimated.View>
             );
       }
 
@@ -241,7 +206,7 @@ const MeadPage = () => {
             <View style={globalStyles.headerContainer}>
                 <Text style={globalStyles.header}>{meadDetails["name"]}</Text>
             </View>
-            <View style={globalStyles.bodyContainer}>
+            <Reanimated.View style={globalStyles.bodyContainer}>
                 <View style={globalStyles.bodyContainerRow}>
                     <Text style={globalStyles.label}>Started:</Text>
                     <Text style={globalStyles.bodyText}>{localizedDate(meadDetails["dateStarted"])}</Text>
@@ -250,78 +215,106 @@ const MeadPage = () => {
                     <Text style={globalStyles.label}>Description:</Text>
                     <Text style={globalStyles.bodyText}>{meadDetails["description"]}</Text>
                 </View>
-                <View style={globalStyles.bodyContainerRow}>
-                    <View style={[globalStyles.containerRowSpaceBetween]}>
+                <Reanimated.View style={globalStyles.bodyContainerRow}>
+                    <Reanimated.View style={[globalStyles.containerRowSpaceBetween]}>
                         <Text style={globalStyles.label}>Recipe:</Text>
                         <Pressable
                             onPress={() => setRecipeModalVisible(true)}>
                             <Text style={globalStyles.linkText}>Add Ingredient</Text>
                         </Pressable>
-                    </View>
+                    </Reanimated.View>
                     {meadDetails?.recipe?.map((ingredient, index) =>
-                        <Swipeable key={ingredient.name+ingredient.metric+ingredient.amount} renderRightActions={(progress, dragX) => renderIngredientRightActions(progress, dragX, index)}>
-                            <View key={index} style={[globalStyles.containerRowSpaceBetween, globalStyles.smallSpacing, globalStyles.shaded]}>
-                                <Text style={globalStyles.value}>{ingredient.name}</Text>
-                                <Text style={globalStyles.value}>{ingredient.amount} {ingredient.metric}</Text>
-                            </View>
-                        </Swipeable>
+                        <GestureHandlerRootView key={ingredient.name+ingredient.metric+ingredient.amount+index} style={globalStyles.smallSpacing}>
+                            <ReanimatedSwipeable 
+                                ref={(ref) => {
+                                    if (ref) swipeableRefs.current.set(index, ref);
+                                }}
+                                containerStyle={globalStyles.shaded}
+                                friction={1} 
+                                enableTrackpadTwoFingerGesture 
+                                onSwipeableOpen={() => deleteIngredient(index)}
+                                renderRightActions={(progress, dragX) => renderRightAction(progress, dragX)}
+                                >
+                                <Reanimated.View key={index} style={globalStyles.containerRowSpaceBetween}>
+                                    <Text style={globalStyles.boldedValue}>{ingredient.name}</Text>
+                                    <Text style={globalStyles.value}>{ingredient.amount} {ingredient.metric}</Text>
+                                </Reanimated.View>
+                            </ReanimatedSwipeable>
+                        </GestureHandlerRootView>
                     )}
-                </View>
-                <View style={globalStyles.bodyContainerRow}>
-                    <View style={[globalStyles.containerRowSpaceBetween]}>
+                </Reanimated.View>
+                <Reanimated.View style={globalStyles.bodyContainerRow}>
+                    <Reanimated.View style={[globalStyles.containerRowSpaceBetween]}>
                         <Text style={globalStyles.label}>Tags:</Text>
                         <Pressable
                             onPress={() => setTagModalVisible(true)}>
                             <Text style={globalStyles.linkText}>Add Tag</Text>
                         </Pressable>
-                    </View>
-                    {
-                        meadDetails?.tags?.map((tag, index) =>
-                        <Swipeable key={tag} renderRightActions={(progress, dragX) => renderTagRightActions(progress, dragX, index)}>
-                            <View key={index} style={[globalStyles.tagContainer, globalStyles.shaded, globalStyles.smallSpacing]}>
-                                <Text style={globalStyles.value}>{tag}</Text>
-                            </View>
-                        </Swipeable>
+                    </Reanimated.View>
+                    {meadDetails?.tags?.map((tag, index) =>
+                        <GestureHandlerRootView style={globalStyles.smallSpacing} key={tag+index}>
+                            <ReanimatedSwipeable
+                                ref={(ref) => {
+                                    if (ref) swipeableRefs.current.set(index, ref);
+                                }}
+                                containerStyle={globalStyles.shaded}
+                                friction={1} 
+                                enableTrackpadTwoFingerGesture 
+                                onSwipeableOpen={() => deleteTag(index)}
+                                renderRightActions={(progress, dragX) => renderRightAction(progress, dragX)}
+                                >
+                                <Reanimated.View key={index}>
+                                    <Text style={globalStyles.boldedValue}>{tag}</Text>
+                                </Reanimated.View>
+                            </ReanimatedSwipeable>
+                        </GestureHandlerRootView>
                         )
                     }
-                </View>
-                <View style={globalStyles.bodyContainerRow}>
-                    <View style={[globalStyles.containerRowSpaceBetween]}>
+                </Reanimated.View>
+                <Reanimated.View style={globalStyles.bodyContainerRow}>
+                    <Reanimated.View style={[globalStyles.containerRowSpaceBetween]}>
                         <Text style={globalStyles.label}>Events:</Text>
                         <Pressable
                             onPress={() => setEventModalVisible(true)}>
                             <Text style={globalStyles.linkText}>Add Event</Text>
                         </Pressable>
-                    </View>
+                    </Reanimated.View>
                     {meadEvents?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((event, index) => (
-                            <Swipeable
-                                key={event.id}
-                                renderRightActions={(progress, dragX) =>
-                                    renderEventRightActions(progress, dragX, index)
-                                }>
-                                <Pressable
-                                    key={index}
-                                    style={({ pressed }) => [
-                                        globalStyles.eventContainer, globalStyles.shaded, globalStyles.smallSpacing,
-                                        pressed && {opacity: 0.8}
-                                    ]}
-                                    onLongPress={() => onEventLongPress(event)}>
-                                    <View style={globalStyles.containerRowSpaceBetween}>
-                                        <Text style={globalStyles.containerText}>{event.type}</Text>
-                                        <Text>{localizedDate(event.date)}</Text>
-                                    </View>
-                                    {event.value.length > 24 ? (
-                                        <Text style={globalStyles.value}>
-                                            {event.value.substring(0, 24)}...
-                                        </Text>
-                                    ) : (
-                                        <Text style={globalStyles.value}>{event.value}</Text>
-                                    )}
-                                </Pressable>
-                            </Swipeable>
+                            <GestureHandlerRootView key={event.id} style={globalStyles.smallSpacing}>
+                                <ReanimatedSwipeable
+                                    ref={(ref) => {
+                                        if (ref) swipeableRefs.current.set(index, ref);
+                                    }}
+                                    containerStyle={globalStyles.shaded}
+                                    friction={1} 
+                                    enableTrackpadTwoFingerGesture 
+                                    onSwipeableOpen={() => deleteEvent(index)}
+                                    renderRightActions={(progress, dragX) => renderRightAction(progress, dragX)}
+                                    >
+                                    <Pressable
+                                        key={index}
+                                        style={({ pressed }) => [
+                                            globalStyles.eventContainer, globalStyles.shaded,
+                                            pressed && {opacity: 0.8}
+                                        ]}
+                                        onLongPress={() => onEventLongPress(event)}>
+                                        <Reanimated.View style={globalStyles.containerRowSpaceBetween}>
+                                            <Text style={globalStyles.boldedValue}>{event.type}</Text>
+                                            <Text style={globalStyles.boldedValue}>{localizedDate(event.date)}</Text>
+                                        </Reanimated.View>
+                                        {event.value.length > 24 ? (
+                                            <Text style={globalStyles.value}>
+                                                {event.value.substring(0, 24)}...
+                                            </Text>
+                                        ) : (
+                                            <Text style={globalStyles.value}>{event.value}</Text>
+                                        )}
+                                    </Pressable>
+                                </ReanimatedSwipeable>
+                            </GestureHandlerRootView>
                         ))}
-                </View>
-            </View>
+                </Reanimated.View>
+            </Reanimated.View>
         </ScrollView>
     );
 };

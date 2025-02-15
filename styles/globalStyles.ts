@@ -48,6 +48,7 @@ export function getGlobalStyles(theme, textSize) {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
+            marginBottom: 10,
         },
         swipedConfirmationContainer: {
             flex: 1,
@@ -99,6 +100,17 @@ export function getGlobalStyles(theme, textSize) {
             fontSize: textSize.labelFontSize,
             fontWeight: 'bold',
             color: theme.color,
+        },
+        swipeDeleteLabel: {
+            fontSize: textSize.labelFontSize,
+            fontWeight: 'bold',
+            color: theme.color,
+            marginLeft: 30,
+            marginRight: 10,
+        },
+        boldedValue: {
+            fontSize: textSize.textFontSize,
+            fontWeight: 'bold',
         },
         value: {
             fontSize: textSize.textFontSize,
