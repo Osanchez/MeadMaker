@@ -69,13 +69,13 @@ const recipeCalculator = () => {
     const validateForm = () => { 
         let errors = {}; 
         if (!batchSize || isNaN(Number(batchSize))) {
-            errors["batchSize"] = "Batch Size is required and must be a number";
+            errors["batchSize"] = "You must enter a valid batch size.";
         }
         if (!ingredientToAdd) {
-            errors["ingredientToAdd"] = "Ingredient is required";
+            errors["ingredientToAdd"] = "You must select an ingredient.";
         }
         if (!amountToAdd || isNaN(Number(amountToAdd))) {
-            errors["amountToAdd"] = "Amount to add is required and must be a number";
+            errors["amountToAdd"] = "You must enter a valid ingredient amount.";
         }
         // check if batch size is larger than total volume
         if (batchSize && calculateTotalVolume() > Number(batchSize)) {
@@ -263,6 +263,14 @@ const recipeCalculator = () => {
         return delleUnits
     }
 
+    const calculateRecipe = () => {
+        if (!validBatchSize) {
+            alert("Batch size must be larger than total volume.");
+            return;
+        }
+        setRecipeModalVisible(true)
+    }
+
 
 
     return ( 
@@ -412,7 +420,7 @@ const recipeCalculator = () => {
                             placeholderStyle={globalStyles.placeholderStyle}
                             selectedTextStyle={globalStyles.selectedTextStyle}
                             data={nutrientsArray}
-                            value={yeast}
+                            value={selectedNutrients}
                             labelField="label"
                             valueField="value"
                             onChange={(item) => setSelectedNutrients(item.value)}
@@ -427,7 +435,7 @@ const recipeCalculator = () => {
                             placeholderStyle={globalStyles.placeholderStyle}
                             selectedTextStyle={globalStyles.selectedTextStyle}
                             data={numberOfAdditionsArray}
-                            value={yeast}
+                            value={numberAdditions}
                             labelField="label"
                             valueField="value"
                             onChange={(item) => setNumberAdditions(item.value)}
@@ -470,7 +478,7 @@ const recipeCalculator = () => {
                                 globalStyles.buttonStyle,
                                 pressed && {opacity: 0.8}
                             ]}
-                            onPress={() => setRecipeModalVisible(true)}
+                            onPress={() => calculateRecipe()}
                         >
                             <Text style={globalStyles.buttonText}>Calculate Recipe</Text>
                         </Pressable>
